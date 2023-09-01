@@ -159,7 +159,7 @@ public class ConfigBd extends javax.swing.JFrame {
         // Execute os comandos SQL para criar tabelas e inserir dados
         String sql2 = 
 "CREATE TABLE `estoque` (\n" +
-"  `id` int(11) NOT NULL,\n" +
+"  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n" +
 "  `quantidade` int(11) DEFAULT NULL\n" +
 ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n";
                 
@@ -171,7 +171,7 @@ public class ConfigBd extends javax.swing.JFrame {
            
            
    String sql4 = "CREATE TABLE `produto` (\n" +
-"  `id` int(11) NOT NULL,\n" +
+"  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,\n" +
 "  `nome` varchar(255) DEFAULT NULL,\n" +
 "  `preco` decimal(10,2) DEFAULT NULL,\n" +
 "  `estoque_id` int(11) DEFAULT NULL\n" +
@@ -179,7 +179,7 @@ public class ConfigBd extends javax.swing.JFrame {
            
            
    String sql5 = "CREATE TABLE `tigela` (\n" +
-"  `id` int(11) NOT NULL,\n" +
+"  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,\n" +
 "  `nome` varchar(255) DEFAULT NULL,\n" +
 "  `tara` decimal(10,2) DEFAULT NULL,\n" +
 "  `unica` tinyint(1) DEFAULT NULL\n" +
@@ -187,7 +187,7 @@ public class ConfigBd extends javax.swing.JFrame {
            
           
    String sql6 = "CREATE TABLE `usuario` (\n" +
-"  `id` int(11) NOT NULL,\n" +
+"  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,\n" +
 "  `nome` varchar(255) DEFAULT NULL,\n" +
 "  `senha` varchar(255) DEFAULT NULL\n" +
 ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n";
@@ -196,25 +196,10 @@ public class ConfigBd extends javax.swing.JFrame {
 "(1, 'admin', 'admin123');\n";
  
   String sql8= "INSERT INTO `loja` (`id`, `nome`, `logo`) VALUES\n" +
-"(1, 'DEFAULT', null);\n";
+"(1, 'DEFAULT', ' ');\n";
   
-String sql9 = "ALTER TABLE `estoque`\n" +
-"  ADD PRIMARY KEY (`id`);\n" +
-"ALTER TABLE `produto`\n" +
-"  ADD PRIMARY KEY (`id`),\n" +
+String sql9 = "ALTER TABLE `produto`\n" +
 "  ADD KEY `estoque_id` (`estoque_id`);\n" +
-"ALTER TABLE `tigela`\n" +
-"  ADD PRIMARY KEY (`id`);\n" +
-"ALTER TABLE `usuario`\n" +
-"  ADD PRIMARY KEY (`id`);\n" +
-"ALTER TABLE `estoque`\n" +
-"  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\n" +
-"ALTER TABLE `produto`\n" +
-"  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;\n" +
-"ALTER TABLE `tigela`\n" +
-"  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;\n" +
-"ALTER TABLE `usuario`\n" +
-"  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;\n" +
 "ALTER TABLE `produto`\n" +
 "  ADD CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`estoque_id`) REFERENCES `estoque` (`id`);\n" ;
    
