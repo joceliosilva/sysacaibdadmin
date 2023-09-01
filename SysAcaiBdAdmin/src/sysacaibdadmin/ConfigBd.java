@@ -9,6 +9,7 @@ import com.mysql.cj.xdevapi.Statement;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +20,8 @@ public class ConfigBd extends javax.swing.JFrame {
     /** Creates new form ConfigBd */
     public ConfigBd() {
         initComponents();
+        ConfigBd db = this;
+        db.setLocationRelativeTo(null);
     }
 
     /** This method is called from within the constructor to
@@ -34,23 +37,26 @@ public class ConfigBd extends javax.swing.JFrame {
         txtHost = new javax.swing.JTextField();
         txtPorta = new javax.swing.JTextField();
         txtUser = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        USUÁRIO = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         btnGerarBD = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         txtsenha = new javax.swing.JPasswordField();
+        btnGerarBD1 = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("GERADOR DE BD - SYSACAI");
 
-        jLabel1.setText("HOST");
+        txtHost.setBorder(javax.swing.BorderFactory.createTitledBorder("HOST"));
+        txtHost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtHostActionPerformed(evt);
+            }
+        });
 
-        USUÁRIO.setText("USUÁRIO");
+        txtPorta.setBorder(javax.swing.BorderFactory.createTitledBorder("PORTA"));
 
-        jLabel4.setText("SENHA");
+        txtUser.setBorder(javax.swing.BorderFactory.createTitledBorder("USUÁRIO"));
 
         btnGerarBD.setText("GERAR BD");
         btnGerarBD.addActionListener(new java.awt.event.ActionListener() {
@@ -59,67 +65,67 @@ public class ConfigBd extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("PORTA");
+        txtsenha.setBorder(javax.swing.BorderFactory.createTitledBorder("SENHA"));
 
-        txtsenha.setText("jPasswordField1");
+        btnGerarBD1.setText("EXCUIR BD");
+        btnGerarBD1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarBD1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(btnGerarBD)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(USUÁRIO)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGap(67, 67, 67)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtsenha, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtHost, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtPorta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtsenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtHost, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(222, 222, 222))
+                                .addComponent(txtPorta))
+                            .addGap(49, 49, 49)))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addComponent(btnGerarBD)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnGerarBD1)
+                .addGap(0, 91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtHost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(27, 27, 27)
-                        .addComponent(txtPorta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5))
-                .addGap(8, 8, 8)
+                .addGap(28, 28, 28)
+                .addComponent(txtHost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(txtPorta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(txtsenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(USUÁRIO)
-                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtsenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnGerarBD)
-                .addContainerGap(64, Short.MAX_VALUE))
+                    .addComponent(btnGerarBD)
+                    .addComponent(btnGerarBD1))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGerarBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarBDActionPerformed
-        String host = txtHost.getText();
+    String host = txtHost.getText();
     String porta = txtPorta.getText();
     String usuario = txtUser.getText();
     String senha = new String(txtsenha.getPassword()); // Obtém a senha como String
@@ -130,6 +136,10 @@ public class ConfigBd extends javax.swing.JFrame {
     Connection conn = null;
     java.sql.Statement stmt = null;
 
+    if (host.isEmpty() || porta.isEmpty() || usuario.isEmpty() || senha.isEmpty()) {
+        // Exiba uma mensagem de erro ao usuário
+        JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios!", "Erro", JOptionPane.ERROR_MESSAGE);
+    }else{
     try {
         // Estabeleça a conexão com o servidor MySQL
         conn = DriverManager.getConnection(urlBanco, usuario, senha);
@@ -138,121 +148,147 @@ public class ConfigBd extends javax.swing.JFrame {
         stmt = conn.createStatement();
         String nomeBanco = "sysacai"; // Substitua pelo nome desejado
         String sql = "CREATE DATABASE IF NOT EXISTS " + nomeBanco;
-        stmt.executeUpdate(sql);
+        
         System.out.println("Banco de dados criado com sucesso.");
         
-         conn.setCatalog(nomeBanco);
+          String sql1 = "USE "+ nomeBanco; // Os comandos SQL que você mencionou
+
+     
+        System.out.println("usando db.");
 
         // Execute os comandos SQL para criar tabelas e inserir dados
-        String sql2 = "SET SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO';\n" +
-             "START TRANSACTION;\n" +
-             "SET time_zone = '+00:00';\n" +
-             "\n" +
-             "CREATE TABLE `estoque` (\n" +
-             "  `id` int(11) NOT NULL,\n" +
-             "  `quantidade` int(11) DEFAULT NULL\n" +
-             ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n" +
-             "\n" +
-             "CREATE TABLE `loja` (\n" +
-             "  `id` int(11) NOT NULL,\n" +
-             "  `nome` varchar(255) DEFAULT NULL,\n" +
-             "  `logo` blob DEFAULT NULL\n" +
-             ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n" +
-             "\n" +
-             "CREATE TABLE `produto` (\n" +
-             "  `id` int(11) NOT NULL,\n" +
-             "  `nome` varchar(255) DEFAULT NULL,\n" +
-             "  `preco` decimal(10,2) DEFAULT NULL,\n" +
-             "  `estoque_id` int(11) DEFAULT NULL\n" +
-             ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n" +
-             "\n" +
-             "CREATE TABLE `tigela` (\n" +
-             "  `id` int(11) NOT NULL,\n" +
-             "  `nome` varchar(255) DEFAULT NULL,\n" +
-             "  `tara` decimal(10,2) DEFAULT NULL,\n" +
-             "  `unica` tinyint(1) DEFAULT NULL\n" +
-             ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n" +
-             "\n" +
-             "CREATE TABLE `usuario` (\n" +
-             "  `id` int(11) NOT NULL,\n" +
-             "  `nome` varchar(255) DEFAULT NULL,\n" +
-             "  `senha` varchar(255) DEFAULT NULL\n" +
-             ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n" +
-             "\n" +
-             "--\n" +
-             "INSERT INTO `usuario` (`id`, `nome`, `senha`) VALUES\n" +
-             "(1, 'admin', 'admin123');\n" +
-             "\n" +
-             "--\n" +
-             "-- Índices para tabelas despejadas\n" +
-             "--\n" +
-             "--\n" +
-             "-- Índices para tabela `estoque`\n" +
-             "--\n" +
-             "ALTER TABLE `estoque`\n" +
-             "  ADD PRIMARY KEY (`id`);\n" +
-             "\n" +
-             "--\n" +
-             "-- Índices para tabela `produto`\n" +
-             "--\n" +
-             "ALTER TABLE `produto`\n" +
-             "  ADD PRIMARY KEY (`id`),\n" +
-             "  ADD KEY `estoque_id` (`estoque_id`);\n" +
-             "\n" +
-             "--\n" +
-             "-- Índices para tabela `tigela`\n" +
-             "--\n" +
-             "ALTER TABLE `tigela`\n" +
-             "  ADD PRIMARY KEY (`id`);\n" +
-             "\n" +
-             "--\n" +
-             "-- Índices para tabela `usuario`\n" +
-             "--\n" +
-             "ALTER TABLE `usuario`\n" +
-             "  ADD PRIMARY KEY (`id`);\n" +
-             "\n" +
-             "--\n" +
-             "-- AUTO_INCREMENT de tabelas despejadas\n" +
-             "--\n" +
-             "--\n" +
-             "-- AUTO_INCREMENT de tabela `estoque`\n" +
-             "--\n" +
-             "ALTER TABLE `estoque`\n" +
-             "  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\n" +
-             "\n" +
-             "--\n" +
-             "-- AUTO_INCREMENT de tabela `produto`\n" +
-             "--\n" +
-             "ALTER TABLE `produto`\n" +
-             "  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;\n" +
-             "\n" +
-             "--\n" +
-             "-- AUTO_INCREMENT de tabela `tigela`\n" +
-             "--\n" +
-             "ALTER TABLE `tigela`\n" +
-             "  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;\n" +
-             "\n" +
-             "--\n" +
-             "-- AUTO_INCREMENT de tabela `usuario`\n" +
-             "--\n" +
-             "ALTER TABLE `usuario`\n" +
-             "  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;\n" +
-             "\n" +
-             "--\n" +
-             "-- Restrições para despejos de tabelas\n" +
-             "--\n" +
-             "--\n" +
-             "-- Limitadores para a tabela `produto`\n" +
-             "--\n" +
-             "ALTER TABLE `produto`\n" +
-             "  ADD CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`estoque_id`) REFERENCES `estoque` (`id`);\n" +
-             "COMMIT;";
+        String sql2 = 
+"CREATE TABLE `estoque` (\n" +
+"  `id` int(11) NOT NULL,\n" +
+"  `quantidade` int(11) DEFAULT NULL\n" +
+") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n";
+                
+   String sql3 = "CREATE TABLE `loja` (\n" +
+"  `id` int(11) NOT NULL,\n" +
+"  `nome` varchar(255) DEFAULT NULL,\n" +
+"  `logo` blob DEFAULT NULL\n" +
+") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n";
+           
+           
+   String sql4 = "CREATE TABLE `produto` (\n" +
+"  `id` int(11) NOT NULL,\n" +
+"  `nome` varchar(255) DEFAULT NULL,\n" +
+"  `preco` decimal(10,2) DEFAULT NULL,\n" +
+"  `estoque_id` int(11) DEFAULT NULL\n" +
+") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n";
+           
+           
+   String sql5 = "CREATE TABLE `tigela` (\n" +
+"  `id` int(11) NOT NULL,\n" +
+"  `nome` varchar(255) DEFAULT NULL,\n" +
+"  `tara` decimal(10,2) DEFAULT NULL,\n" +
+"  `unica` tinyint(1) DEFAULT NULL\n" +
+") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n";
+           
+          
+   String sql6 = "CREATE TABLE `usuario` (\n" +
+"  `id` int(11) NOT NULL,\n" +
+"  `nome` varchar(255) DEFAULT NULL,\n" +
+"  `senha` varchar(255) DEFAULT NULL\n" +
+") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n";
+   
+ String sql7= "INSERT INTO `usuario` (`id`, `nome`, `senha`) VALUES\n" +
+"(1, 'admin', 'admin123');\n";
+ 
+  String sql8= "INSERT INTO `loja` (`id`, `nome`, `logo`) VALUES\n" +
+"(1, 'DEFAULT', null);\n";
+  
+String sql9 = "ALTER TABLE `estoque`\n" +
+"  ADD PRIMARY KEY (`id`);\n" +
+"ALTER TABLE `produto`\n" +
+"  ADD PRIMARY KEY (`id`),\n" +
+"  ADD KEY `estoque_id` (`estoque_id`);\n" +
+"ALTER TABLE `tigela`\n" +
+"  ADD PRIMARY KEY (`id`);\n" +
+"ALTER TABLE `usuario`\n" +
+"  ADD PRIMARY KEY (`id`);\n" +
+"ALTER TABLE `estoque`\n" +
+"  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\n" +
+"ALTER TABLE `produto`\n" +
+"  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;\n" +
+"ALTER TABLE `tigela`\n" +
+"  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;\n" +
+"ALTER TABLE `usuario`\n" +
+"  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;\n" +
+"ALTER TABLE `produto`\n" +
+"  ADD CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`estoque_id`) REFERENCES `estoque` (`id`);\n" ;
+   
+     stmt.executeUpdate(sql);
+        stmt.executeUpdate(sql1);
+        stmt.executeUpdate(sql6);
+         stmt.executeUpdate(sql3);
+          stmt.executeUpdate(sql4);
+           stmt.executeUpdate(sql5);
+            stmt.executeUpdate(sql2);
+             stmt.executeUpdate(sql7);
+                    stmt.executeUpdate(sql8);
+        JOptionPane.showMessageDialog(null,"BANCO DE DADOS GERADO COM SUCESSO!");
+        dispose();
+        
+    
 
-        stmt.executeUpdate(sql2);
-        System.out.println("Tabelas e dados criados com sucesso.");
+       
 
     } catch (SQLException ex) {
         ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "ERRO AO GERAR BANCO, UM BANCO JÁ EXISTE NO:" + host);
+    } finally {
+        try {
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }}
+    }//GEN-LAST:event_btnGerarBDActionPerformed
+
+    private void txtHostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHostActionPerformed
+      
+    }//GEN-LAST:event_txtHostActionPerformed
+
+    private void btnGerarBD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarBD1ActionPerformed
+         String host = txtHost.getText();
+    String porta = txtPorta.getText();
+    String usuario = txtUser.getText();
+    String senha = new String(txtsenha.getPassword()); // Obtém a senha como String
+
+    // Crie a URL de conexão com base nos valores fornecidos
+    String urlBanco = "jdbc:mysql://" + host + ":" + porta + "/";
+
+    Connection conn = null;
+    java.sql.Statement stmt = null;
+        int resposta = JOptionPane.showConfirmDialog(this, "Tem certeza de que deseja excluir o banco de dados?", "Confirmação", JOptionPane.YES_NO_OPTION);
+
+         if (resposta == JOptionPane.YES_OPTION) {
+    if (host.isEmpty() || porta.isEmpty() || usuario.isEmpty() || senha.isEmpty()) {
+        // Exiba uma mensagem de erro ao usuário
+        JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios!", "Erro", JOptionPane.ERROR_MESSAGE);
+    }else{
+    try {
+        // Estabeleça a conexão com o servidor MySQL
+        conn = DriverManager.getConnection(urlBanco, usuario, senha);
+
+        // Crie o banco de dados se ele não existir
+        stmt = conn.createStatement();
+        String nomeBanco = "sysacai"; // Substitua pelo nome desejado
+        String sql = "DROP DATABASE " + nomeBanco;
+        stmt.execute(sql);
+        JOptionPane.showMessageDialog(null,"BANCO DE DADOS EXCLUÍDO");
+        dispose();
+        
+
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "ERRO AO EXCLUIR BANCO. NENUM BANCO ENCONTRADO EM :" + host);
     } finally {
         try {
             if (stmt != null) {
@@ -265,7 +301,11 @@ public class ConfigBd extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-    }//GEN-LAST:event_btnGerarBDActionPerformed
+    }
+         }else{
+             dispose();
+         }
+    }//GEN-LAST:event_btnGerarBD1ActionPerformed
 
     
     public static void main(String args[]) {
@@ -301,12 +341,9 @@ public class ConfigBd extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel USUÁRIO;
     private javax.swing.JButton btnGerarBD;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnGerarBD1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtHost;
     private javax.swing.JTextField txtPorta;
